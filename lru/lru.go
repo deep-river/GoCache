@@ -33,7 +33,7 @@ func (c *Cache) Add(key string, value Value) {
 	if ele, ok := c.cache[key]; ok {
 		c.ll.MoveToFront(ele)
 		kv := ele.Value.(*entry) // .(TYPE)表示类型动态转换/查询，只能对接口对象使用
-		c.nbytes += int64(value.Len()) - int64(value.Len())
+		c.nbytes += int64(value.Len()) - int64(kv.value.Len())
 		kv.value = value
 	} else {
 		ele := c.ll.PushFront(&entry {key, value})
